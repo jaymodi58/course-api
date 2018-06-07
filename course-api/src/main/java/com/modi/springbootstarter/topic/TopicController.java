@@ -11,10 +11,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+/*
+ * TopicController is system under test (SUT) & Dependency is topicService
+ */
 public class TopicController {
 
 	@Autowired
-	private TopicService topicService;
+	private ITopicService topicService;
+
+	public TopicController(ITopicService topicService) {
+		this.topicService = topicService;
+	}
 
 	@RequestMapping("/topics")
 	public List<Topic> getAllTopics() {
