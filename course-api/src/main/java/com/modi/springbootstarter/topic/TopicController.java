@@ -23,13 +23,13 @@ public class TopicController {
 		this.topicService = topicService;
 	}
 
-	@RequestMapping("/topics")
+	@RequestMapping(method = RequestMethod.GET, value = "/topics")
 	public List<Topic> getAllTopics() {
 
 		return topicService.getAllTopics();
 	}
 
-	@RequestMapping("/topics/{id}")
+	@RequestMapping(method = RequestMethod.GET, value = "/topics/{id}")
 	public Optional<Topic> getTopic(@PathVariable String id) {
 
 		return topicService.getTopic(id);
