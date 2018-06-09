@@ -1,7 +1,6 @@
 package com.modi.springbootstarter.course;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,11 @@ import io.swagger.annotations.ApiResponses;
 public class CourseController {
 
 	@Autowired
-	private CourseService courseService;
+	private ICourseService courseService;
+
+	public CourseController(ICourseService courseService) {
+		this.courseService = courseService;
+	}
 
 	@ApiOperation(value = "It returns the all the courses of the specified topic(by topic id).")
 	@ApiResponses(value = { @ApiResponse(code = 522, message = "API's own internal error"),
@@ -35,7 +38,7 @@ public class CourseController {
 
 	@ApiOperation(value = "It returns the course based on topic id and course id.")
 	@RequestMapping(method = RequestMethod.GET, value = "/topics/{topicId}/courses/{id}")
-	public Optional<Course> getCourse(@PathVariable String id) {
+	public Course getCourse(@PathVariable String id) {
 
 		return courseService.getCourse(id);
 	}

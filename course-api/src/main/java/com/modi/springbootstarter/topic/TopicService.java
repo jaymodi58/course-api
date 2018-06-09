@@ -21,8 +21,14 @@ public class TopicService implements ITopicService {
 	}
 
 	@Override
-	public Optional<Topic> getTopic(String id) {
-		return topicRepository.findById(id);
+	public Topic getTopic(String id) {
+
+		Optional<Topic> optionalTopic = topicRepository.findById(id);
+		if (optionalTopic.isPresent()) {
+			return optionalTopic.get();
+		}
+
+		return null;
 	}
 
 	@Override

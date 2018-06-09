@@ -7,27 +7,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CourseService {
+public class CourseService implements ICourseService {
 
 	@Autowired
 	private CourseRepository courseRepository;
 
+	@Override
 	public List<Course> getAllCourses(String topicId) {
 		return courseRepository.findByTopicId(topicId);
 	}
 
-	public Optional<Course> getCourse(String id) {
-		return courseRepository.findById(id);
+	@Override
+	public Course getCourse(String id) {
+
+		Optional<Course> optionalCourse = courseRepository.findById(id);
+		if (optionalCourse.isPresent()) {
+			return optionalCourse.get();
+		}
+
+		return null;
 	}
 
+	@Override
 	public void addCourse(Course course) {
 		courseRepository.save(course);
 	}
 
+	@Override
 	public void updateCourse(Course course) {
 		courseRepository.save(course);
 	}
 
+	@Override
 	public void deleteCourse(String id) {
 		courseRepository.deleteById(id);
 	}

@@ -30,7 +30,7 @@ public class TopicController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/topics/{id}")
-	public Optional<Topic> getTopic(@PathVariable String id) {
+	public Topic getTopic(@PathVariable String id) {
 
 		return topicService.getTopic(id);
 	}
