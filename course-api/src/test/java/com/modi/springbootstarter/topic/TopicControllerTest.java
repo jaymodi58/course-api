@@ -13,7 +13,7 @@ import org.junit.Test;
 public class TopicControllerTest {
 
 	@Test
-	public void test() {
+	public void getAllTopics() {
 
 		ITopicService topicServiceMock = mock(TopicService.class);
 
@@ -31,4 +31,20 @@ public class TopicControllerTest {
 
 	}
 
+	@Test
+	public void getTopic() {
+
+		ITopicService topicServiceMock = mock(TopicService.class);
+
+		when(topicServiceMock.getTopic("java")).thenReturn(new Topic("java", "core Java", "Java_Desc"));
+
+		TopicController topicController = new TopicController(topicServiceMock);
+
+		Topic topic = topicController.getTopic("java");
+
+		assertEquals("java", topic.getId());
+		assertEquals("core Java", topic.getName());
+		assertEquals("Java_Desc", topic.getDescription());
+
+	}
 }
